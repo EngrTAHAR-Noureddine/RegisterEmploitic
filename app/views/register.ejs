@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Emploitic | Registration</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        padding: 0 16% 0 10%;
+        gap: 2%;
+      }
+
+      form {
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 2em 5em;
+        text-align: center;
+        width: 80%;
+        max-width: 350px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .logo {
+        display: block;
+        margin: 0 auto 20px;
+        width: 150px;
+      }
+
+      h1 {
+        color: #0074f4;
+        margin-bottom: 1em;
+      }
+
+      label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+        margin-top: 7px;
+        align-self: flex-start;
+        color: #515151;
+      }
+
+      img {
+        width: 500px !important;
+        height: 220px;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        width: calc(100% - 20px);
+        padding: 10px 10px;
+        margin-bottom: 7px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      button[type="submit"] {
+        background-color: #03c77a;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px;
+        cursor: pointer;
+        font-size: 16px;
+        margin: 0;
+        margin-top: 24px;
+        align-self: flex-end;
+        width: 55%;
+      }
+
+      button[type="submit"]:hover {
+        background-color: #02b66a;
+      }
+
+      #successModal {
+        display: none;
+        flex-direction: column;
+        background-color: #fff;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+      }
+
+      #successModal h2 {
+        font-size: 24px;
+        margin: 0;
+        margin-bottom: 10px;
+        color: #03c77a;
+        translate: 0 -25px;
+      }
+
+      #closeButton {
+        background-color: #0074f4;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <img class="logo" src="logo.png" alt="Emploitic Logo" id="thelogo" />
+
+    <form action="/register" method="POST" id="theform">
+      <h1>Inscrivez-vous</h1>
+
+      <label for="first_name">Nom:</label>
+      <input type="text" id="first_name" name="first_name" required /><br />
+
+      <label for="last_name">Prénom:</label>
+      <input type="text" id="last_name" name="last_name" required /><br />
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required /><br />
+
+      <label for="password">Mot de passe:</label>
+      <input type="password" id="password" name="password" required /><br />
+
+      <button type="submit">Creer mon compte</button>
+    </form>
+
+    <div id="successModal" style="display: none">
+      <img class="logo" src="logo.png" alt="Emploitic Logo" />
+      <h2>Inscription réussi, Bienvenue!</h2>
+
+      <button id="closeButton" onclick="window.location.href = '/'">Close</button>
+    </div>
+
+    <script>
+      function getUrlParameter(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)");
+        var results = regex.exec(location.search);
+        return results === null
+          ? ""
+          : decodeURIComponent(results[1].replace(/\+/g, " "));
+      }
+      
+      if (getUrlParameter("success") === "true") {
+        var successModal = document.getElementById("successModal");
+        var logo = document.getElementById("thelogo");
+        var form = document.getElementById("theform");
+        if (successModal) {
+          logo.style.display = "none";
+          form.style.display = "none";
+          successModal.style.display = "flex";
+        }
+      }
+    </script>
+  </body>
+</html>
